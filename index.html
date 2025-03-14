@@ -30,18 +30,7 @@
                 <h1>Ezgi Matbaa</h1>
                 <p class="hero-subtitle">40 Yıllık Tecrübe ile Hizmetinizdeyiz</p>
                 <div class="hero-features">
-                    <div class="hero-feature-item">
-                        <span class="hero-icon"><i class="fas fa-palette"></i></span>
-                        <span>Profesyonel Tasarım</span>
-                    </div>
-                    <div class="hero-feature-item">
-                        <span class="hero-icon"><i class="fas fa-bolt"></i></span>
-                        <span>Kaliteli İşçilik</span>
-                    </div>
-                    <div class="hero-feature-item">
-                        <span class="hero-icon"><i class="fas fa-check-circle"></i></span>
-                        <span>%100 Müşteri Memnuniyeti</span>
-                    </div>
+                    <!-- Kaliteli İşçilik kartı kaldırıldı -->
                 </div>
                 <div class="hero-buttons">
                     <a href="#urunler" class="cta-button primary">Ürün Kataloğu</a>
@@ -74,11 +63,6 @@
             <h2 class="section-title">Hizmetlerimiz</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-                    <h3>Grafik Tasarım</h3>
-                    <p>Özel tasarım hizmetleri ile markanızı öne çıkarın.</p>
-                </div>
-                <div class="service-card">
                     <div class="service-icon"><i class="fas fa-print"></i></div>
                     <h3>Matbaa Hizmetleri</h3>
                     <p>Yüksek kaliteli matbaa hizmetleri sunuyoruz.</p>
@@ -94,6 +78,20 @@
         <section id="urunler">
             <h2 class="section-title">Ürünlerimiz</h2>
             <div class="products-grid">
+                <!-- Yeni Broşür & El İlanı & Magnet Kartı -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/brosur.png" alt="Broşür & El İlanı & Magnet">
+                    </div>
+                    <h3><i class="fas fa-file-alt"></i> Broşür & El İlanı & Magnet</h3>
+                    <p>Etkili tanıtım materyalleri ile işinizi büyütün</p>
+                    <div class="product-features">
+                        <span><i class="fas fa-star"></i> Yüksek Kalite</span>
+                        <span><i class="fas fa-paint-brush"></i> Özel Tasarım</span>
+                    </div>
+                    <button class="product-button" onclick="showBrosurModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                </div>
+
                 <div class="product-card">
                     <div class="product-image">
                         <img src="images/erdem.jpg" alt="Düğün Davetiyesi" class="catalog-trigger" data-catalog="erdem">
@@ -106,7 +104,7 @@
                         <span><i class="fas fa-envelope"></i> Zarflı</span>
                     </div>
                     <div class="button-container">
-                        <a href="#" class="cta-button catalog-trigger" data-catalog="erdem">Katalogları İncele</a>
+                        <a href="#" class="cta-button" onclick="showCatalogUpdateMessage(event)">Kataloğu İndir</a>
                     </div>
                 </div>
 
@@ -122,7 +120,7 @@
                         <span><i class="fas fa-envelope"></i> Zarflı</span>
                     </div>
                     <div class="button-container">
-                        <a href="#" class="cta-button catalog-trigger" data-catalog="ekonom">Katalogları İncele</a>
+                        <a href="https://erdemdavetiye.com/docs/baski-calismalari/ekonom/ekonom-davetiye-resimler.zip" class="cta-button" download>Kataloğu İndir</a>
                     </div>
                 </div>
 
@@ -138,7 +136,7 @@
                         <span><i class="fas fa-envelope"></i> Zarflı</span>
                     </div>
                     <div class="button-container">
-                        <a href="#" class="cta-button catalog-trigger" data-catalog="sunnet">Katalogları İncele</a>
+                        <a href="https://erdemdavetiye.com/docs/baski-calismalari/sunnet/sunnet-davetiye-resimler.zip" class="cta-button" download>Kataloğu İndir</a>
                     </div>
                 </div>
 
@@ -154,7 +152,7 @@
                         <span><i class="fas fa-envelope"></i> Özel Seri</span>
                     </div>
                     <div class="button-container">
-                        <a href="#" class="cta-button catalog-trigger" data-catalog="butiqline">Katalogları İncele</a>
+                        <a href="https://erdemdavetiye.com/docs/baski-calismalari/butiqline/butiqline-davetiye-resimler.zip" class="cta-button" download>Kataloğu İndir</a>
                     </div>
                 </div>
 
@@ -169,7 +167,7 @@
                         <span><i class="fas fa-paint-brush"></i> Özel Tasarım</span>
                         <span><i class="fas fa-check"></i> Güvenilir Ürün</span>
                     </div>
-                    <button class="product-button" onclick="showKartvizitModal()">Güvenilir Ürünler İçin İletişime Geç</button>
+                    <button class="product-button" onclick="showKartvizitModal()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
                 <!-- Kaşe Ürün Kartı -->
@@ -186,6 +184,32 @@
                     <div class="button-container">
                         <a href="#" class="cta-button catalog-trigger" data-catalog="kase">Detayları Gör</a>
                     </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/otokobi.jpg" alt="Otokobi Makbuzu">
+                    </div>
+                    <h3><i class="fas fa-receipt"></i> Otokobi Makbuzu</h3>
+                    <p>Profesyonel ve resmi otokobi makbuzları</p>
+                    <div class="product-features">
+                        <span><i class="fas fa-star"></i> Yüksek Kalite</span>
+                        <span><i class="fas fa-print"></i> Kaliteli Baskı</span>
+                    </div>
+                    <button class="product-button" onclick="showOtokobiModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/zarf.jpg" alt="Zarf & Antetli Kağıt">
+                    </div>
+                    <h3><i class="fas fa-envelope-open-text"></i> Zarf & Antetli Kağıt</h3>
+                    <p>Kurumsal kimliğinizi yansıtan profesyonel zarf ve antetli kağıtlar</p>
+                    <div class="product-features">
+                        <span><i class="fas fa-star"></i> Yüksek Kalite</span>
+                        <span><i class="fas fa-print"></i> Kaliteli Baskı</span>
+                    </div>
+                    <button class="product-button" onclick="showZarfModal()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
             </div>
         </section>
@@ -297,7 +321,7 @@
                 const targetTitle = document.querySelector(`#${targetId} .section-title`);
                 if (targetTitle) {
                     targetTitle.classList.remove('animate');
-                    void targetTitle.offsetWidth; // Reflow
+                    void targetTitle.offsetWidth; // Reflowh
                     targetTitle.classList.add('animate');
                 }
             });
@@ -430,6 +454,125 @@
             
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+        }
+
+        function showBrosurModal() {
+            const modal = document.getElementById('catalogModal');
+            const catalogGrid = document.querySelector('.catalog-grid');
+            const modalTitle = document.querySelector('.modal-title');
+            
+            modalTitle.textContent = 'Broşür & El İlanı & Magnet';
+            catalogGrid.innerHTML = `
+                <div class="modal-info brosur-modal">
+                    <div class="modal-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Profesyonel Tanıtım Materyalleri</h3>
+                    <p>İşletmeniz için özel tasarlanmış broşür, el ilanı ve magnet çözümleri sunuyoruz.</p>
+                    <div class="brosur-features">
+                        <div class="feature-item">
+                            <i class="fas fa-palette"></i>
+                            <span>Özel Tasarım</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-print"></i>
+                            <span>Kaliteli Baskı</span>
+                        </div>
+                    </div>
+                    <div class="modal-contact-buttons">
+                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
+                        </a>
+                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
+                            <i class="fas fa-phone"></i> Hemen Ara
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showOtokobiModal() {
+            const modal = document.getElementById('catalogModal');
+            const catalogGrid = document.querySelector('.catalog-grid');
+            const modalTitle = document.querySelector('.modal-title');
+            
+            modalTitle.textContent = 'Otokobi Makbuzu';
+            catalogGrid.innerHTML = `
+                <div class="modal-info otokobi-modal">
+                    <div class="modal-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <h3>Profesyonel Otokobi Makbuzları</h3>
+                    <p>İşletmeniz için özel tasarlanmış, resmi geçerliliği olan otokobi makbuzları sunuyoruz.</p>
+                    <div class="otokobi-features">
+                        <div class="feature-item">
+                            <i class="fas fa-star"></i>
+                            <span>Yüksek Kalite</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-print"></i>
+                            <span>Kaliteli Baskı</span>
+                        </div>
+                    </div>
+                    <div class="modal-contact-buttons">
+                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
+                        </a>
+                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
+                            <i class="fas fa-phone"></i> Hemen Ara
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showZarfModal() {
+            const modal = document.getElementById('catalogModal');
+            const catalogGrid = document.querySelector('.catalog-grid');
+            const modalTitle = document.querySelector('.modal-title');
+            
+            modalTitle.textContent = 'Zarf & Antetli Kağıt';
+            catalogGrid.innerHTML = `
+                <div class="modal-info zarf-modal">
+                    <div class="modal-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Profesyonel Zarf & Antetli Kağıt</h3>
+                    <p>Kurumsal kimliğinizi güçlendiren, özel tasarım zarf ve antetli kağıt çözümleri sunuyoruz.</p>
+                    <div class="zarf-features">
+                        <div class="feature-item">
+                            <i class="fas fa-star"></i>
+                            <span>Yüksek Kalite</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-print"></i>
+                            <span>Kaliteli Baskı</span>
+                        </div>
+                    </div>
+                    <div class="modal-contact-buttons">
+                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
+                        </a>
+                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
+                            <i class="fas fa-phone"></i> Hemen Ara
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showCatalogUpdateMessage(event) {
+            event.preventDefault();
+            alert("Şuan katalogumuz güncelleniyor. Lütfen daha sonra tekrar deneyiniz.");
         }
     </script>
 
