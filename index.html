@@ -285,6 +285,9 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Ezgi Matbaa - Tüm hakları saklıdır.</p>
+            <div class="developer-info">
+                <p>Web Tasarım & Geliştirme: <a href="https://github.com/Eyp0" target="_blank">Eyüp Korkmaz</a></p>
+            </div>
         </div>
     </footer>
     <script>
@@ -347,7 +350,7 @@
             })),
             kase: Array.from({length: 4}, (_, i) => ({
                 img: `images/kase/kase(${i + 1}).jpeg`,
-                code: `KAS-${String(i + 1).padStart(3, '0')}`
+                code: `SIRDAŞ ${310 + i}`
             }))
         };
 
@@ -583,20 +586,33 @@
             <h2 class="modal-title">Kaşe Detayları</h2>
             <div class="catalog-grid">
                 <div class="catalog-item">
-                    <img src="images/kase/kase(1).jpeg" alt="Kaşe Model 910">
+                    <img src="images/kase/kase(1).jpeg" alt="sırdaş310">
                     <div class="overlay">sırdaş310</div>
                 </div>
                 <div class="catalog-item">
-                    <img src="images/kase/kase(2).jpeg" alt="Kaşe Model 911">
+                    <img src="images/kase/kase(2).jpeg" alt="sırdaş311">
                     <div class="overlay">sırdaş311</div>
                 </div>
                 <div class="catalog-item">
-                    <img src="images/kase/kase(3).jpeg" alt="Kaşe Model 912">
+                    <img src="images/kase/kase(3).jpeg" alt="sırdaş312">
                     <div class="overlay">sırdaş312</div>
                 </div>
                 <div class="catalog-item">
-                    <img src="images/kase/kase(4).jpeg" alt="Kaşe Model 913">
+                    <img src="images/kase/kase(4).jpeg" alt="sırdaş313">
                     <div class="overlay">sırdaş313</div>
+                </div>
+                
+                <!-- Eklenen bilgi notu ve iletişim butonu -->
+                <div class="catalog-info-note">
+                    <p>Daha fazla model ve detaylı bilgi için lütfen bizimle iletişime geçin.</p>
+                    <div class="modal-contact-buttons">
+                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
+                        </a>
+                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
+                            <i class="fas fa-phone"></i> Hemen Ara
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
