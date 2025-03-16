@@ -65,6 +65,22 @@
       ]
     }
     </script>
+    <style>
+        .developer-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .developer-info a {
+            color: #FF8C00; /* Turuncu renk */
+            text-decoration: none;
+        }
+
+        .developer-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZV1TER266"></script>
 <script>
@@ -253,15 +269,15 @@
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="images/otokobi.jpg" alt="Otokobi Makbuzu">
+                        <img src="images/otokobi.jpg" alt="Otokopili Makbuzu">
                     </div>
-                    <h3><i class="fas fa-receipt"></i> Otokobi Makbuzu</h3>
-                    <p>Profesyonel ve resmi otokobi makbuzları</p>
+                    <h3><i class="fas fa-receipt"></i> Otokopili Makbuzu</h3>
+                    <p>Profesyonel ve resmi otokopili makbuzları</p>
                     <div class="product-features">
                         <span><i class="fas fa-star"></i> Yüksek Kalite</span>
                         <span><i class="fas fa-print"></i> Kaliteli Baskı</span>
                     </div>
-                    <button class="product-button" onclick="showOtokobiModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                    <button class="product-button" onclick="showOtokopiliModal()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
                 <div class="product-card">
@@ -572,19 +588,19 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function showOtokobiModal() {
+        function showOtokopiliModal() {
             const modal = document.getElementById('catalogModal');
             const catalogGrid = document.querySelector('.catalog-grid');
             const modalTitle = document.querySelector('.modal-title');
             
-            modalTitle.textContent = 'Otokobi Makbuzu';
+            modalTitle.textContent = 'Otokopili Makbuzu';
             catalogGrid.innerHTML = `
                 <div class="modal-info otokobi-modal">
                     <div class="modal-icon">
                         <i class="fas fa-receipt"></i>
                     </div>
-                    <h3>Profesyonel Otokobi Makbuzları</h3>
-                    <p>İşletmeniz için özel tasarlanmış, resmi geçerliliği olan otokobi makbuzları sunuyoruz.</p>
+                    <h3>Profesyonel Otokopili Makbuzları</h3>
+                    <p>İşletmeniz için özel tasarlanmış, resmi geçerliliği olan otokopili makbuzları sunuyoruz.</p>
                     <div class="otokobi-features">
                         <div class="feature-item">
                             <i class="fas fa-star"></i>
@@ -652,6 +668,42 @@
             event.preventDefault();
             alert("Şuan katalogumuz güncelleniyor. Lütfen daha sonra tekrar deneyiniz.");
         }
+
+        // Sayfa yüklendiğinde çalışacak kod
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll olayını dinle
+            window.addEventListener('scroll', highlightNavLink);
+            
+            // Sayfa yüklendiğinde bir kez çalıştır
+            highlightNavLink();
+            
+            // Navigasyon linklerini vurgulama fonksiyonu
+            function highlightNavLink() {
+                // Tüm bölümleri al
+                const sections = document.querySelectorAll('section[id]');
+                
+                // Sayfanın mevcut scroll pozisyonunu al
+                const scrollY = window.pageYOffset;
+                
+                // Her bölümü kontrol et
+                sections.forEach(current => {
+                    const sectionHeight = current.offsetHeight;
+                    const sectionTop = current.offsetTop - 100; // Biraz tolerans ekle
+                    const sectionId = current.getAttribute('id');
+                    
+                    // Eğer mevcut scroll pozisyonu bu bölümün içindeyse
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        // Tüm linklerdeki active sınıfını kaldır
+                        document.querySelectorAll('.nav-links a').forEach(a => {
+                            a.classList.remove('active');
+                        });
+                        
+                        // İlgili linke active sınıfını ekle
+                        document.querySelector(`.nav-links a[href="#${sectionId}"]`).classList.add('active');
+                    }
+                });
+            }
+        });
     </script>
 
     <!-- Modal yapısı -->
