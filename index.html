@@ -173,9 +173,9 @@
                     <button class="product-button" onclick="showBrosurModal()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
-                <div class="product-card">
+             <div class="product-card">
                     <div class="product-image">
-                        <img src="images/erdem.jpg" alt="Düğün Davetiyesi" class="catalog-trigger" data-catalog="erdem">
+                        <img src="images/erdem.png" alt="Düğün Davetiyesi" class="catalog-trigger" data-catalog="erdem">
                     </div>
                     <h3><i class="fas fa-gift"></i> Düğün Davetiyesi</h3>
                     <p>Özel tasarım düğün davetiyeleri</p>
@@ -185,7 +185,7 @@
                         <span><i class="fas fa-envelope"></i> Zarflı</span>
                     </div>
                     <div class="button-container">
-                        <a href="#" class="cta-button" onclick="showCatalogUpdateMessage(event)">Kataloğu İndir</a>
+                        <a href="https://erdemdavetiye.com/docs/baski-calismalari/erdem/erdem-davetiye-resimler.zip" class="cta-button">Kataloğu İndir</a>
                     </div>
                 </div>
 
@@ -452,36 +452,39 @@
 
             // Tüm trigger elementlerini seç (hem resimler hem butonlar)
             document.querySelectorAll('.catalog-trigger').forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.preventDefault(); // Varsayılan davranışı engelle
-                    
-                    const catalogType = this.dataset.catalog;
-                    const items = catalogData[catalogType];
-                    
-                    // Modal başlığını güncelle
-                    const title = this.closest('.product-card').querySelector('h3').textContent;
-                    modalTitle.textContent = catalogType === 'kase' ? `${title} Detayları` : `${title} Kataloğu`;
-                    
-                    // Katalog grid'ini temizle ve yeni içeriği ekle
-                    catalogGrid.innerHTML = '';
-                    
-                    if (items && items.length > 0) {
-                        items.forEach(item => {
-                            catalogGrid.innerHTML += `
-                                <div class="catalog-item">
-                                    <img src="${item.img}" alt="${item.code}">
-                                    <div class="overlay">${item.code}</div>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        catalogGrid.innerHTML = '<p>Bu kategoride henüz ürün bulunmamaktadır.</p>';
-                    }
-                    
-                    // Modalı göster
-                    modal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                });
+                // Sadece butonlara tıklama olayı ekle
+                if (trigger.tagName === 'A') {
+                    trigger.addEventListener('click', function(e) {
+                        e.preventDefault(); // Varsayılan davranışı engelle
+                        
+                        const catalogType = this.dataset.catalog;
+                        const items = catalogData[catalogType];
+                        
+                        // Modal başlığını güncelle
+                        const title = this.closest('.product-card').querySelector('h3').textContent;
+                        modalTitle.textContent = catalogType === 'kase' ? `${title} Detayları` : `${title} Kataloğu`;
+                        
+                        // Katalog grid'ini temizle ve yeni içeriği ekle
+                        catalogGrid.innerHTML = '';
+                        
+                        if (items && items.length > 0) {
+                            items.forEach(item => {
+                                catalogGrid.innerHTML += `
+                                    <div class="catalog-item">
+                                        <img src="${item.img}" alt="${item.code}">
+                                        <div class="overlay">${item.code}</div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            catalogGrid.innerHTML = '<p>Bu kategoride henüz ürün bulunmamaktadır.</p>';
+                        }
+                        
+                        // Modalı göster
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
             });
 
             // Modal kapatma işlemleri
