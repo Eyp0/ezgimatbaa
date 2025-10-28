@@ -1,50 +1,38 @@
-// ============================================
-// 1. SAYFA İÇİ NAVİGASYON (YUMUŞAK KAYDIRMA)
-// ============================================
 const tumLinkler = document.querySelectorAll('a[href^="#"]');
 
 tumLinkler.forEach(link => {
     link.addEventListener('click', function(e) {
         const hedef = this.getAttribute('href');
         
-        // Eğer sadece # varsa çık
         if (hedef === '#') {
             e.preventDefault();
             return;
         }
         
         e.preventDefault();
-        const hedefId = hedef.substring(1); // # işaretini kaldır
+        const hedefId = hedef.substring(1);
         const hedefBolum = document.getElementById(hedefId);
         
-        // Hedefe yumuşak kaydır
         if (hedefBolum) {
             hedefBolum.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-
-// ============================================
-// 2. BAŞLIK ANİMASYONLARI
-// ============================================
 const basliklar = document.querySelectorAll('.section-title');
 
-// Başlık görünürse animasyon başlat
 const animasyonBaslat = new IntersectionObserver((liste) => {
     liste.forEach(item => {
         if (item.isIntersecting) {
             item.target.classList.remove('animate');
-            void item.target.offsetWidth; // Tarayıcıyı zorla
+            void item.target.offsetWidth;
             item.target.classList.add('animate');
         }
     });
 }, { threshold: 0.5 });
 
-// Her başlığı izle
 basliklar.forEach(baslik => animasyonBaslat.observe(baslik));
 
-// Menü linklerine tıklandığında da animasyon yap
 const menuLinkleri = document.querySelectorAll('a[href="#hizmetler"], a[href="#urunler"], a[href="#iletisim"]');
 
 menuLinkleri.forEach(link => {
@@ -60,10 +48,6 @@ menuLinkleri.forEach(link => {
     });
 });
 
-
-// ============================================
-// 3. KATALOG VERİLERİ
-// ============================================
 const kataloglar = {
     erdem: Array.from({length: 176}, (_, i) => ({
         resim: `images/erdem/erdem (${i + 1}).jpg`,
@@ -87,12 +71,6 @@ const kataloglar = {
     }))
 };
 
-
-// ============================================
-// 4. MODAL (AÇILIR PENCERE) FONKSİYONLARI
-// ============================================
-
-// Modal aç
 function modalAc(baslik, icerik) {
     const modal = document.getElementById('catalogModal');
     const modalBaslik = document.querySelector('.modal-title');
@@ -101,17 +79,15 @@ function modalAc(baslik, icerik) {
     modalBaslik.textContent = baslik;
     modalIcerik.innerHTML = icerik;
     modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Arka planı sabitle
+    document.body.style.overflow = 'hidden';
 }
 
-// Modal kapat
 function modalKapat() {
     const modal = document.getElementById('catalogModal');
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Kaydırmayı geri aç
+    document.body.style.overflow = 'auto';
 }
 
-// İletişim butonları HTML'i oluştur
 function iletisimButonlari() {
     return `
         <div class="modal-contact-buttons">
@@ -125,7 +101,6 @@ function iletisimButonlari() {
     `;
 }
 
-// Özellik ikonu oluştur
 function ozellikIkonu(ikon, yazi) {
     return `
         <div class="feature-item">
@@ -135,12 +110,6 @@ function ozellikIkonu(ikon, yazi) {
     `;
 }
 
-
-// ============================================
-// 5. ÜRÜN MODALLARI
-// ============================================
-
-// Kartvizit modalı
 function kartvizitModalGoster() {
     const icerik = `
         <div class="modal-info kartvizit-modal">
@@ -158,7 +127,6 @@ function kartvizitModalGoster() {
     modalAc('Kartvizit Tasarımı', icerik);
 }
 
-// Broşür modalı
 function brosurModalGoster() {
     const icerik = `
         <div class="modal-info brosur-modal">
@@ -175,7 +143,6 @@ function brosurModalGoster() {
     modalAc('Broşür & El İlanı & Magnet', icerik);
 }
 
-// Otokopi modalı
 function otokopiModalGoster() {
     const icerik = `
         <div class="modal-info otokobi-modal">
@@ -192,7 +159,6 @@ function otokopiModalGoster() {
     modalAc('Otokopili Makbuzu', icerik);
 }
 
-// Zarf modalı
 function zarfModalGoster() {
     const icerik = `
         <div class="modal-info zarf-modal">
@@ -209,10 +175,6 @@ function zarfModalGoster() {
     modalAc('Zarf & Antetli Kağıt', icerik);
 }
 
-
-// ============================================
-// 6. AKTİF MENÜ VURGULAMA
-// ============================================
 function menuVurgula() {
     const bolumler = document.querySelectorAll('section[id]');
     const scrollKonumu = window.pageYOffset;
@@ -222,14 +184,11 @@ function menuVurgula() {
         const bolumBaslangici = bolum.offsetTop - 100;
         const bolumId = bolum.getAttribute('id');
         
-        // Eğer bu bölümdeyiz
         if (scrollKonumu > bolumBaslangici && scrollKonumu <= bolumBaslangici + bolumYuksekligi) {
-            // Tüm menü linklerinden active sınıfını kaldır
             document.querySelectorAll('.nav-links a').forEach(a => {
                 a.classList.remove('active');
             });
             
-            // Sadece bu bölümün linkine active ekle
             const aktifLink = document.querySelector(`.nav-links a[href="#${bolumId}"]`);
             if (aktifLink) {
                 aktifLink.classList.add('active');
@@ -238,44 +197,30 @@ function menuVurgula() {
     });
 }
 
-
-// ============================================
-// 7. SAYFA YÜKLENDİĞİNDE ÇALIŞACAKLAR
-// ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // Modal elementlerini al
     const modal = document.getElementById('catalogModal');
     const katalogAlani = document.querySelector('.catalog-grid');
     const modalBaslik = document.querySelector('.modal-title');
 
-    // Katalog butonlarına tıklama olayı ekle
     const katalogButonlari = document.querySelectorAll('.catalog-trigger');
     
     katalogButonlari.forEach(buton => {
-        // Sadece link (A) elementlerine işlem yap
         if (buton.tagName === 'A') {
             buton.addEventListener('click', function(e) {
-                e.preventDefault(); // Sayfanın başa dönmesini engelle
+                e.preventDefault();
                 
-                // Hangi katalog?
                 const hangiKatalog = this.dataset.catalog;
                 const urunListesi = kataloglar[hangiKatalog];
-                
-                // Ürün kartının başlığını al
                 const baslik = this.closest('.product-card').querySelector('h3').textContent;
                 
-                // Modal başlığını ayarla
                 if (hangiKatalog === 'kase') {
                     modalBaslik.textContent = `${baslik} Detayları`;
                 } else {
                     modalBaslik.textContent = `${baslik} Kataloğu`;
                 }
                 
-                // Katalog alanını temizle
                 katalogAlani.innerHTML = '';
                 
-                // Ürünler varsa göster
                 if (urunListesi && urunListesi.length > 0) {
                     urunListesi.forEach(urun => {
                         katalogAlani.innerHTML += `
@@ -289,34 +234,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     katalogAlani.innerHTML = '<p>Bu kategoride henüz ürün bulunmamaktadır.</p>';
                 }
                 
-                // Modalı göster
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             });
         }
     });
 
-    // Modal kapatma butonuna tıklama
     const kapatButonu = document.querySelector('.close-modal');
     kapatButonu.addEventListener('click', modalKapat);
 
-    // Modal dışına tıklanırsa kapat
     window.addEventListener('click', function(e) {
         if (e.target === modal) {
             modalKapat();
         }
     });
 
-    // ESC tuşuna basılırsa kapat
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.style.display === 'block') {
             modalKapat();
         }
     });
 
-    // Scroll olayını dinle ve menüyü vurgula
     window.addEventListener('scroll', menuVurgula);
-    
-    // Sayfa yüklendiğinde bir kez çalıştır
     menuVurgula();
 });
