@@ -73,7 +73,7 @@
         }
 
         .developer-info a {
-            color: #FF8C00; /* Turuncu renk */
+            color: #FF8C00;
             text-decoration: none;
         }
 
@@ -82,12 +82,12 @@
         }
     </style>
 </head>
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZV1TER266"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-ZZV1TER266');
 </script>
 <body>
@@ -110,9 +110,6 @@
             <div class="hero-content">  
                 <h1>Ezgi Matbaa</h1>
                 <p class="hero-subtitle">40 Yıllık Tecrübe ile Hizmetinizdeyiz</p>
-                <div class="hero-features">
-                    <!-- Kaliteli İşçilik kartı kaldırıldı -->
-                </div>
                 <div class="hero-buttons">
                     <a href="#urunler" class="cta-button primary">Ürün Kataloğu</a>
                     <a href="#iletisim" class="cta-button secondary">İletişime Geç</a>
@@ -159,7 +156,6 @@
         <section id="urunler">
             <h2 class="section-title">Ürünlerimiz</h2>
             <div class="products-grid">
-                <!-- Yeni Broşür & El İlanı & Magnet Kartı -->
                 <div class="product-card">
                     <div class="product-image">
                         <img src="images/brosur.png" alt="Broşür & El İlanı & Magnet">
@@ -170,7 +166,7 @@
                         <span><i class="fas fa-star"></i> Yüksek Kalite</span>
                         <span><i class="fas fa-paint-brush"></i> Özel Tasarım</span>
                     </div>
-                    <button class="product-button" onclick="showBrosurModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                    <button class="product-button" onclick="brosurModalGoster()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
              <div class="product-card">
@@ -248,10 +244,9 @@
                         <span><i class="fas fa-paint-brush"></i> Özel Tasarım</span>
                         <span><i class="fas fa-check"></i> Güvenilir Ürün</span>
                     </div>
-                    <button class="product-button" onclick="showKartvizitModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                    <button class="product-button" onclick="kartvizitModalGoster()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
-                <!-- Kaşe Ürün Kartı -->
                 <div class="product-card">
                     <div class="product-image">
                         <img src="images/kase/kase.jpeg" alt="Kaşe" class="catalog-trigger" data-catalog="kase">
@@ -277,7 +272,7 @@
                         <span><i class="fas fa-star"></i> Yüksek Kalite</span>
                         <span><i class="fas fa-print"></i> Kaliteli Baskı</span>
                     </div>
-                    <button class="product-button" onclick="showOtokopiliModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                    <button class="product-button" onclick="otokopiModalGoster()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
 
                 <div class="product-card">
@@ -290,7 +285,7 @@
                         <span><i class="fas fa-star"></i> Yüksek Kalite</span>
                         <span><i class="fas fa-print"></i> Kaliteli Baskı</span>
                     </div>
-                    <button class="product-button" onclick="showZarfModal()">Detaylı Bilgi İçin İletişime Geç</button>
+                    <button class="product-button" onclick="zarfModalGoster()">Detaylı Bilgi İçin İletişime Geç</button>
                 </div>
             </div>
         </section>
@@ -371,343 +366,9 @@
             </div>
         </div>
     </footer>
-    <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                    return;
-                }
-                
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
 
-        const sectionTitles = document.querySelectorAll('.section-title');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('animate');
-                    void entry.target.offsetWidth; // Reflow
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, {
-            threshold: 0.5
-        });
-
-        sectionTitles.forEach(title => {
-            observer.observe(title);
-        });
-
-        document.querySelectorAll('a[href="#hizmetler"], a[href="#urunler"], a[href="#iletisim"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href').substring(1);
-                const targetTitle = document.querySelector(`#${targetId} .section-title`);
-                if (targetTitle) {
-                    targetTitle.classList.remove('animate');
-                    void targetTitle.offsetWidth; // Reflowh
-                    targetTitle.classList.add('animate');
-                }
-            });
-        });
-
-        // Katalog verisi
-        const catalogData = {
-            erdem: Array.from({length: 176}, (_, i) => ({
-                img: `images/erdem/erdem (${i + 1}).jpg`,
-                code: `ERD-${String(i + 1).padStart(3, '0')}`
-            })),
-            ekonom: Array.from({length: 279}, (_, i) => ({
-                img: `images/ekonom/ekonom (${i + 1}).jpg`,
-                code: `EKO-${String(i + 1).padStart(3, '0')}`
-            })),
-            sunnet: Array.from({length: 119}, (_, i) => ({
-                img: `images/sunnet/sunnet (${i + 1}).jpg`,
-                code: `SUN-${String(i + 1).padStart(3, '0')}`
-            })),
-            butiqline: Array.from({length: 117}, (_, i) => ({
-                img: `images/butik/butik (${i + 1}).jpg`,
-                code: `BTQ-${String(i + 1).padStart(3, '0')}`
-            })),
-            kase: Array.from({length: 4}, (_, i) => ({
-                img: `images/kase/kase(${i + 1}).jpeg`,
-                code: `SIRDAŞ ${910 + i}`
-            }))
-        };
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('catalogModal');
-            const catalogGrid = document.querySelector('.catalog-grid');
-            const modalTitle = document.querySelector('.modal-title');
-
-            // Tüm trigger elementlerini seç (hem resimler hem butonlar)
-            document.querySelectorAll('.catalog-trigger').forEach(trigger => {
-                // Sadece butonlara tıklama olayı ekle
-                if (trigger.tagName === 'A') {
-                    trigger.addEventListener('click', function(e) {
-                        e.preventDefault(); // Varsayılan davranışı engelle
-                        
-                        const catalogType = this.dataset.catalog;
-                        const items = catalogData[catalogType];
-                        
-                        // Modal başlığını güncelle
-                        const title = this.closest('.product-card').querySelector('h3').textContent;
-                        modalTitle.textContent = catalogType === 'kase' ? `${title} Detayları` : `${title} Kataloğu`;
-                        
-                        // Katalog grid'ini temizle ve yeni içeriği ekle
-                        catalogGrid.innerHTML = '';
-                        
-                        if (items && items.length > 0) {
-                            items.forEach(item => {
-                                catalogGrid.innerHTML += `
-                                    <div class="catalog-item">
-                                        <img src="${item.img}" alt="${item.code}">
-                                        <div class="overlay">${item.code}</div>
-                                    </div>
-                                `;
-                            });
-                        } else {
-                            catalogGrid.innerHTML = '<p>Bu kategoride henüz ürün bulunmamaktadır.</p>';
-                        }
-                        
-                        // Modalı göster
-                        modal.style.display = 'block';
-                        document.body.style.overflow = 'hidden';
-                    });
-                }
-            });
-
-            // Modal kapatma işlemleri
-            const closeModal = () => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            };
-
-            // Çarpı işaretine tıklama
-            document.querySelector('.close-modal').addEventListener('click', closeModal);
-
-            // Modal dışına tıklama
-            window.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // ESC tuşuna basma
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.style.display === 'block') {
-                    closeModal();
-                }
-            });
-        });
-
-        function showKartvizitModal() {
-            const modal = document.getElementById('catalogModal');
-            const catalogGrid = document.querySelector('.catalog-grid');
-            const modalTitle = document.querySelector('.modal-title');
-            
-            modalTitle.textContent = 'Kartvizit Tasarımı';
-            catalogGrid.innerHTML = `
-                <div class="modal-info kartvizit-modal">
-                    <div class="modal-icon">
-                        <i class="fas fa-id-card"></i>
-                    </div>
-                    <h3>Profesyonel Kartvizit Hizmeti</h3>
-                    <p>Size özel tasarlanmış, profesyonel kartvizitler için hemen iletişime geçin.</p>
-                    <div class="kartvizit-features">
-                        <div class="feature-item">
-                            <i class="fas fa-palette"></i>
-                            <span>Özel Tasarım</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-print"></i>
-                            <span>Kaliteli Baskı</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Hızlı Teslimat</span>
-                        </div>
-                    </div>
-                    <div class="modal-contact-buttons">
-                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
-                        </a>
-                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
-                            <i class="fas fa-phone"></i> Hemen Ara
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showBrosurModal() {
-            const modal = document.getElementById('catalogModal');
-            const catalogGrid = document.querySelector('.catalog-grid');
-            const modalTitle = document.querySelector('.modal-title');
-            
-            modalTitle.textContent = 'Broşür & El İlanı & Magnet';
-            catalogGrid.innerHTML = `
-                <div class="modal-info brosur-modal">
-                    <div class="modal-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3>Profesyonel Tanıtım Materyalleri</h3>
-                    <p>İşletmeniz için özel tasarlanmış broşür, el ilanı ve magnet çözümleri sunuyoruz.</p>
-                    <div class="brosur-features">
-                        <div class="feature-item">
-                            <i class="fas fa-palette"></i>
-                            <span>Özel Tasarım</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-print"></i>
-                            <span>Kaliteli Baskı</span>
-                        </div>
-                    </div>
-                    <div class="modal-contact-buttons">
-                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
-                        </a>
-                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
-                            <i class="fas fa-phone"></i> Hemen Ara
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showOtokopiliModal() {
-            const modal = document.getElementById('catalogModal');
-            const catalogGrid = document.querySelector('.catalog-grid');
-            const modalTitle = document.querySelector('.modal-title');
-            
-            modalTitle.textContent = 'Otokopili Makbuzu';
-            catalogGrid.innerHTML = `
-                <div class="modal-info otokobi-modal">
-                    <div class="modal-icon">
-                        <i class="fas fa-receipt"></i>
-                    </div>
-                    <h3>Profesyonel Otokopili Makbuzları</h3>
-                    <p>İşletmeniz için özel tasarlanmış, resmi geçerliliği olan otokopili makbuzları sunuyoruz.</p>
-                    <div class="otokobi-features">
-                        <div class="feature-item">
-                            <i class="fas fa-star"></i>
-                            <span>Yüksek Kalite</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-print"></i>
-                            <span>Kaliteli Baskı</span>
-                        </div>
-                    </div>
-                    <div class="modal-contact-buttons">
-                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
-                        </a>
-                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
-                            <i class="fas fa-phone"></i> Hemen Ara
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showZarfModal() {
-            const modal = document.getElementById('catalogModal');
-            const catalogGrid = document.querySelector('.catalog-grid');
-            const modalTitle = document.querySelector('.modal-title');
-            
-            modalTitle.textContent = 'Zarf & Antetli Kağıt';
-            catalogGrid.innerHTML = `
-                <div class="modal-info zarf-modal">
-                    <div class="modal-icon">
-                        <i class="fas fa-envelope-open-text"></i>
-                    </div>
-                    <h3>Profesyonel Zarf & Antetli Kağıt</h3>
-                    <p>Kurumsal kimliğinizi güçlendiren, özel tasarım zarf ve antetli kağıt çözümleri sunuyoruz.</p>
-                    <div class="zarf-features">
-                        <div class="feature-item">
-                            <i class="fas fa-star"></i>
-                            <span>Yüksek Kalite</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-print"></i>
-                            <span>Kaliteli Baskı</span>
-                        </div>
-                    </div>
-                    <div class="modal-contact-buttons">
-                        <a href="https://wa.me/905324539279" class="contact-button whatsapp" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp'tan Yaz
-                        </a>
-                        <a href="tel:(0212) 880 37 03" class="contact-button phone">
-                            <i class="fas fa-phone"></i> Hemen Ara
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function showCatalogUpdateMessage(event) {
-            event.preventDefault();
-            alert("Şuan katalogumuz güncelleniyor. Lütfen daha sonra tekrar deneyiniz.");
-        }
-
-        // Sayfa yüklendiğinde çalışacak kod
-        document.addEventListener('DOMContentLoaded', function() {
-            // Scroll olayını dinle
-            window.addEventListener('scroll', highlightNavLink);
-            
-            // Sayfa yüklendiğinde bir kez çalıştır
-            highlightNavLink();
-            
-            // Navigasyon linklerini vurgulama fonksiyonu
-            function highlightNavLink() {
-                // Tüm bölümleri al
-                const sections = document.querySelectorAll('section[id]');
-                
-                // Sayfanın mevcut scroll pozisyonunu al
-                const scrollY = window.pageYOffset;
-                
-                // Her bölümü kontrol et
-                sections.forEach(current => {
-                    const sectionHeight = current.offsetHeight;
-                    const sectionTop = current.offsetTop - 100; // Biraz tolerans ekle
-                    const sectionId = current.getAttribute('id');
-                    
-                    // Eğer mevcut scroll pozisyonu bu bölümün içindeyse
-                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                        // Tüm linklerdeki active sınıfını kaldır
-                        document.querySelectorAll('.nav-links a').forEach(a => {
-                            a.classList.remove('active');
-                        });
-                        
-                        // İlgili linke active sınıfını ekle
-                        document.querySelector(`.nav-links a[href="#${sectionId}"]`).classList.add('active');
-                    }
-                });
-            }
-        });
-    </script>
+    <!-- Ana JavaScript dosyası -->
+    <script src="script.js"></script>
 
     <!-- Modal yapısı -->
     <div class="catalog-modal" id="catalogModal">
@@ -732,7 +393,6 @@
                     <div class="overlay">sırdaş313</div>
                 </div>
                 
-                <!-- Eklenen bilgi notu ve iletişim butonu -->
                 <div class="catalog-info-note">
                     <p>Daha fazla model ve detaylı bilgi için lütfen bizimle iletişime geçin.</p>
                     <div class="modal-contact-buttons">
@@ -748,4 +408,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
